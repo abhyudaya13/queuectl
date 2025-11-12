@@ -52,7 +52,7 @@ for ($i = 1; $i -le 5; $i++) {
     python queuectl.py enqueue "python -c 'import time; time.sleep(3)'"
 }
 python queuectl.py worker start --count 1
-# Stop midway (Ctrl + C)
+ Stop midway (Ctrl + C)
 python queuectl.py worker start --count 1  # Resumes pending jobs
 
  Scheduled Job
@@ -73,7 +73,7 @@ Components
 
 5) CLI: Provides commands to enqueue, list, retry, and configure the system.
 
-Lifecycle
+# Lifecycle
 
 1) enqueue → job created as pending
 
@@ -87,7 +87,7 @@ Lifecycle
 
 6) User can dlq retry → job returns to pending
 
-Persistence
+# Persistence
 
 1) All state is stored in queue.db, so data survives restarts.
 
@@ -115,7 +115,7 @@ Testing Instructions — How to verify functionality
 | **Scheduling**     | `--run-at` flag                                    | Executes at future time   |
 
 
-Demo Video
+# Demo Video
 
 Watch the working CLI demo here
 https://drive.google.com/file/d/1rWIEnUcl3-tCoj42f6iihlMQm9ycV02X/view?usp=sharing
