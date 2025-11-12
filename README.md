@@ -1,4 +1,4 @@
-# QueueCTL 🧰  
+# QueueCTL
 ### CLI-based Background Job Queue System  
 
 **Author:** Abhyudaya Sharma (PES2UG22CS022)  
@@ -27,13 +27,13 @@ python queuectl.py --help
 
 
 Usage Examples — CLI commands with example outputs
-✅ Successful Job
+Successful Job
 python queuectl.py enqueue "echo hello world"
 python queuectl.py worker start --count 1
 python queuectl.py status
 python queuectl.py list --state completed
 
-❌ Failed Job → Retries → DLQ
+ Failed Job → Retries → DLQ
 python queuectl.py enqueue "no_such_command_foo" --max-retries 3
 python queuectl.py worker start --count 1
 python queuectl.py dlq list
@@ -43,11 +43,11 @@ Example output:
 
 7ff6f8f4-ba02-44ff-8730-c723168afafe dead after 3 attempts | last_error=Exit code 1
 
-🔁 Retry a DLQ Job
+ Retry a DLQ Job
 python queuectl.py dlq retry 7ff6f8f4-ba02-44ff-8730-c723168afafe
 python queuectl.py worker start --count 1
 
-🧱 Persistence Test
+ Persistence Test
 for ($i = 1; $i -le 5; $i++) {
     python queuectl.py enqueue "python -c 'import time; time.sleep(3)'"
 }
