@@ -1,0 +1,5 @@
+# Ignore local files
+queue.db
+__pycache__/
+*.pyc
+*.log

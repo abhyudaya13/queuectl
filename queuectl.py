@@ -242,13 +242,18 @@ def cmd_enqueue(args):
     job_id = db.enqueue(payload)
     print(job_id)
 
+def worker_entry(wid):
+    """Entry point for each worker process (Windows-safe)."""
+    db = QueueDB()
+    run_worker_loop(db, wid)
+
 def cmd_worker_start(args):
     import multiprocessing as mp
-    db = QueueDB()
     procs = []
+
     for i in range(args.count):
         wid = f"w-{uuid4().hex[:8]}"
-        p = mp.Process(target=run_worker_loop, args=(db, wid), daemon=False)
+        p = mp.Process(target=worker_entry, args=(wid,), daemon=False)
         p.start()
         procs.append(p)
         print(f"started worker {wid} (pid={p.pid})")
@@ -257,8 +262,10 @@ def cmd_worker_start(args):
         for p in procs:
             p.join()
     except KeyboardInterrupt:
-        db.stop_worker()  # broadcast stop
+        db = QueueDB()
+        db.stop_worker()
         print("Stopping workers...")
+
 
 def cmd_worker_stop(args):
     db = QueueDB()
